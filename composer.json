@@ -1,0 +1,23 @@
+{
+    "name": "2amigos/yii2-grid-view-library",
+    "description": "GridView Widget Extensions for Yii2.",
+    "keywords": ["yii", "extension", "widget", "grid"],
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Antonio Ramirez",
+            "email": "ramirez.cobos@gmail.com",
+            "homepage": "http://2amigos.us"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "2amigos/yii2-editable-widget": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "dosamigos\\grid\\": ""
+        }
+    }
+}
