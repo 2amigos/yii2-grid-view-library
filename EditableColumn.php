@@ -26,7 +26,7 @@ use yii\helpers\Url;
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @link http://www.ramirezcobos.com/
  * @link http://www.2amigos.us/
- * @package common\extensions\grid
+ * @package dosamigos\grid
  */
 class EditableColumn extends DataColumn
 {
