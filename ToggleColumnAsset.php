@@ -18,7 +18,7 @@ use yii\web\AssetBundle;
  */
 class ToggleColumnAsset extends AssetBundle
 {
-    public $sourcePath = '@2amigos/yii2-grid-view-library/assets/toggle';
+    public $sourcePath = '@vendor/2amigos/yii2-grid-view-library/assets/toggle';
 
     public $js = ['js/dosamigos-toggle.column.js'];
 
