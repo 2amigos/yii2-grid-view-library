@@ -4,7 +4,7 @@
  * @link http://2amigos.us
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
-namespace doamigos\grid;
+namespace dosamigos\grid;
 
 use Yii;
 use yii\base\Action;
