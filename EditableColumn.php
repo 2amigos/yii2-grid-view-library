@@ -141,7 +141,7 @@ class EditableColumn extends DataColumn
         $selector = "a[rel=\"$rel\"]";
         $grid = "#{$this->grid->id}";
         $js[] = ";jQuery('$selector').editable();";
-        $js[] = "yii.editableColumn.registerHandler('$grid', '$selector');";
+        $js[] = "dosamigos.editableColumn.registerHandler('$grid', '$selector');";
         $view->registerJs(implode("\n", $js));
     }
 } 

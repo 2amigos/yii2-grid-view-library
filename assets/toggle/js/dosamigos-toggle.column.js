@@ -3,7 +3,10 @@
  * @link http://2amigos.us
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
-yii.toggleColumn = (function ($) {
+if (typeof dosamigos == "undefined" || !dosamigos) {
+    var dosamigos = {};
+}
+dosamigos.toggleColumn = (function ($) {
     var pub = {
         onText: 'On',
         offText: 'Off',

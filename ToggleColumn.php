@@ -176,11 +176,11 @@ class ToggleColumn extends DataColumn
         $onText = $this->asText ? $this->onLabel : Html::tag('span', '', ['class' => $this->onIcon]);
         $offText = $this->asText ? $this->offLabel : Html::tag('span', '', ['class' => $this->offIcon]);
 
-        $js[] = "yii.toggleColumn.onText='{$onText}'";
-        $js[] = "yii.toggleColumn.offText='{$offText}'";
-        $js[] = "yii.toggleColumn.onTitle='{$this->onLabel}'";
-        $js[] = "yii.toggleColumn.offTitle='{$this->offLabel}'";
-        $js[] = "yii.toggleColumn.registerHandler('$grid','$selector', $callback);";
+        $js[] = "dosamigos.toggleColumn.onText='{$onText}'";
+        $js[] = "dosamigos.toggleColumn.offText='{$offText}'";
+        $js[] = "dosamigos.toggleColumn.onTitle='{$this->onLabel}'";
+        $js[] = "dosamigos.toggleColumn.offTitle='{$this->offLabel}'";
+        $js[] = "dosamigos.toggleColumn.registerHandler('$grid','$selector', $callback);";
 
         $view->registerJs(implode("\n", $js));
     }
