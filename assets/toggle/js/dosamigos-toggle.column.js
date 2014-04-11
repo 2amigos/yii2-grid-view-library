@@ -26,8 +26,8 @@ dosamigos.toggleColumn = (function ($) {
                             .attr('title', data.value ? pub.onTitle : pub.offTitle);
                         $.isFunction(cb) && cb(true, data);
                     },
-                    error: function () {
-                        $.isFunction(cb) && cb(false, data);
+                    error: function (xhr) {
+                        $.isFunction(cb) && cb(false, xhr);
                     }
                 });
                 return false;

@@ -79,7 +79,7 @@ class ToggleAction extends Action
     protected function findModel($id)
     {
         $class = $this->modelClass;
-        if ($id !== null && ($model = $class::find($id)) !== null) {
+        if ($id !== null && ($model = $class::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
