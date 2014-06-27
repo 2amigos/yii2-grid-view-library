@@ -19,6 +19,7 @@ use yii\grid\DataColumn;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\helpers\Json;
 
 /**
  * EditableColumn adds X-Editable capabilities to a column
@@ -32,6 +33,7 @@ class EditableColumn extends DataColumn
 {
     /**
      * @var array the options for the X-editable.js plugin.
+     * Closures will be applied to each row being rendered.
      * Please refer to the X-editable.js plugin web page for possible options.
      * @see http://vitalets.github.io/x-editable/docs.html#editable
      */
@@ -48,7 +50,20 @@ class EditableColumn extends DataColumn
      * @var string the type of editor
      */
     public $type = 'text';
-
+    /**
+     * @var array JsExpressions or static options that should be applied in
+     * the jQuery editable() call (copied from $editableOptions during init).
+     */
+    private $globalOptions = [];
+    /**
+     * @var array options that will be applied as-is to the a tag.
+     */
+    private $linkOptions = [];
+    /**
+     * @var array closures to be called and applied to the a tag.
+     */
+    private $funcOptions = [];
+    
     /**
      * @inheritdoc
      * @throws \yii\base\InvalidConfigException
@@ -61,11 +76,23 @@ class EditableColumn extends DataColumn
 
         parent::init();
 
-        $this->format = 'raw';
+        $this->globalOptions['url'] = Url::to((array)$this->url);
+        $this->globalOptions['name'] = $this->attribute;
+        $this->globalOptions['type'] = $this->type;
 
         $rel = $this->attribute . '_editable' . $this->classSuffix;
-        $this->options['pjax'] = '0';
-        $this->options['rel'] = $rel;
+        $this->linkOptions['rel'] = $rel;
+        $this->linkOptions['pjax'] = '0';
+        
+        foreach ($this->editableOptions as $prop => $v) {
+            if (is_callable($v)) {
+                // keep a ref to this closure so we can call it for every row
+                $this->funcOptions[$prop] = $v;
+            } else {
+                // apply this option to the jQuery editable() call
+                $this->globalOptions[$prop] = $v;
+            }
+        }
 
         $this->registerClientScript();
     }
@@ -75,19 +102,16 @@ class EditableColumn extends DataColumn
      */
     protected function renderDataCellContent($model, $key, $index)
     {
-
         $value = parent::renderDataCellContent($model, $key, $index);
-
-        foreach ($this->editableOptions as $prop => $v) {
-            $this->options['data-' . $prop] = $v;
+        
+        $options = ['data-pk' => $key] + $this->linkOptions;
+        
+        foreach ($this->funcOptions as $prop => $v)
+        {
+            $options['data-' . $prop] = call_user_func($v, $model, $key, $index);
         }
-        $url = (array)$this->url;
-        $this->options['data-url'] = Url::to($url);
-        $this->options['data-pk'] = $key;
-        $this->options['data-name'] = $this->attribute;
-        $this->options['data-type'] = $this->type;
 
-        return Html::a($value, null, $this->options);
+        return Html::a($value, null, $options);
     }
 
     /**
@@ -137,10 +161,11 @@ class EditableColumn extends DataColumn
         }
 
         EditableColumnAsset::register($view);
-        $rel = $this->options['rel'];
+        $rel = $this->linkOptions['rel'];
         $selector = "a[rel=\"$rel\"]";
         $grid = "#{$this->grid->id}";
-        $js[] = ";jQuery('$selector').editable();";
+        $options = Json::encode($this->globalOptions);
+        $js[] = ";jQuery('$selector').editable($options);";
         $js[] = "dosamigos.editableColumn.registerHandler('$grid', '$selector');";
         $view->registerJs(implode("\n", $js));
     }
