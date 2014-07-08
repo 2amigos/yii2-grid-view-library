@@ -13,6 +13,7 @@ dosamigos.toggleColumn = (function ($) {
         onTitle: 'On',
         offTitle: 'Off',
         registerHandler: function (grid, selector, cb) {
+            $(document).off('click.toggleColumn', selector,);
             $(document).on('click.toggleColumn', selector, function (e) {
                 e.preventDefault();
                 var $self = $(this);
