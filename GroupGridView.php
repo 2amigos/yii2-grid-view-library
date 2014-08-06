@@ -115,6 +115,8 @@ class GroupGridView extends GridView
             foreach ($this->columns as $column) {
                 if (property_exists($column, 'attribute') && ArrayHelper::getValue($column, 'attribute') == $name) {
                     $columns[$key] = $column;
+                } elseif ($this->filterModel->getAttributeLabel($name) && in_array($name, $this->extraRowColumns)) {
+                    $columns[$key] = new DataColumn(['attribute' => $name]);
                 }
             }
         }
