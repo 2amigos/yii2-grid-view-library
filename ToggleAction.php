@@ -57,11 +57,11 @@ class ToggleAction extends Action
         if (Yii::$app->request->isAjax) {
 
             $model = $this->findModel($id);
-            $model->$attribute = ($model->$attribute == $this->offValue) ? $this->onValue : $this->offValue;
-            Yii::$app->response->format = Response::FORMAT_JSON;
+            $model->setAttributes([$attribute => $model->$attribute == $this->offValue ? $this->onValue : $this->offValue]);
             if($model->save(false, [$attribute])) {
                 return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
             }
+            Yii::$app->response->format = Response::FORMAT_JSON;
             return ['result' => false, 'errors' => $model->getErrors()];
 
         } else {
