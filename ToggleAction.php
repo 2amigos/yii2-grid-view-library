@@ -58,10 +58,12 @@ class ToggleAction extends Action
 
             $model = $this->findModel($id);
             $model->setAttributes([$attribute => $model->$attribute == $this->offValue ? $this->onValue : $this->offValue]);
+            
+            // Can also be handled by ContentNegotiator
+            Yii::$app->response->format = Response::FORMAT_JSON;
             if($model->save(false, [$attribute])) {
                 return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
             }
-            Yii::$app->response->format = Response::FORMAT_JSON;
             return ['result' => false, 'errors' => $model->getErrors()];
 
         } else {
