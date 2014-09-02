@@ -23,6 +23,9 @@ use yii\web\NotFoundHttpException;
  */
 class ToggleAction extends Action
 {
+    const TOGGLE_ANY = 'toggleany';
+    const TOGGLE_UNIQ = 'toggleuniq';
+    const TOGGLE_COND = 'togglecond';
     /**
      * @var string the class name of the model.
      */
@@ -35,6 +38,43 @@ class ToggleAction extends Action
      * @var mixed the off value to set the attribute with.
      */
     public $offValue = 0;
+
+    /**
+     * one of constants
+     * ToggleAction::TOGGLE_ANY - change state of any element (by default)
+     * ToggleAction::TOGGLE_UNIQ - only one element must be equal $onValue
+     * ToggleAction::TOGGLE_COND - toggle one element to $onValue per condition (for example only one foto can be set as cover per album)
+     *
+     * @var string
+     */
+    public $toggleType = self::TOGGLE_ANY;
+
+    /**
+     * property for TOGGLE_UNIQ and TOGGLE_COND types - allow set all in offValue
+     *
+     * @var bool
+     */
+    public $allowAllOff = false;
+
+    /**
+     * @var mixed (array|string|callable) $condition the conditions that will be put in the WHERE part of the UPDATE SQL
+     * (used where $toggleType=ToggleAction::TOGGLE_COND)
+     * Please refer to [[Query::where()]] on how to specify this parameter.
+     *
+     * @example
+     * ['another_attribute'=>20]
+     * or
+     * function($model){
+     *     return ['smth_attr'=>$model->attr];
+     * }
+     * where $model - is current toggled model object
+     **/
+    public $condition = [];
+
+    /**
+     * @var string scenario for this action
+     **/
+    public $scenario = 'default';
 
     /**
      * @inheritdoc
@@ -55,15 +95,39 @@ class ToggleAction extends Action
     public function run($id, $attribute)
     {
         if (Yii::$app->request->isAjax) {
-
             $model = $this->findModel($id);
-            $model->setAttributes([$attribute => $model->$attribute == $this->offValue ? $this->onValue : $this->offValue]);
-            
-            // Can also be handled by ContentNegotiator
+            $model->setScenario($this->scenario);
             Yii::$app->response->format = Response::FORMAT_JSON;
-            if($model->save(false, [$attribute])) {
-                return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
+            if ($this->toggleType == self::TOGGLE_ANY) {
+                $model->setAttributes(
+                    [$attribute => $model->$attribute == $this->offValue ? $this->onValue : $this->offValue]
+                );
+                if ($model->save(false, [$attribute])) {
+                    return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
+                }
+            } elseif ($this->toggleType == self::TOGGLE_UNIQ) {
+                if ($model->$attribute == $this->offValue or $this->allowAllOff) {
+                    $model->updateAll([$attribute => $this->offValue]);
+                    $model->setAttributes(
+                        [$attribute => $model->$attribute == $this->offValue ? $this->onValue : $this->offValue]
+                    );
+                    if ($model->save(false, [$attribute])) {
+                        return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
+                    }
+                }
+            } else {
+                if ($model->$attribute == $this->offValue or $this->allowAllOff) {
+                    $cond = is_callable($this->condition) ? call_user_func($this->condition, $model) : $this->condition;
+                    $model->updateAll([$attribute => $this->offValue], $cond);
+                    $model->setAttributes(
+                        [$attribute => $model->$attribute == $this->offValue ? $this->onValue : $this->offValue]
+                    );
+                    if ($model->save(false, [$attribute])) {
+                        return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
+                    }
+                }
             }
+
             return ['result' => false, 'errors' => $model->getErrors()];
 
         } else {
