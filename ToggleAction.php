@@ -106,7 +106,7 @@ class ToggleAction extends Action
                     return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
                 }
             } elseif ($this->toggleType == self::TOGGLE_UNIQ) {
-                if ($model->$attribute == $this->offValue or $this->allowAllOff) {
+                if ($model->$attribute == $this->offValue || $this->allowAllOff) {
                     $model->updateAll([$attribute => $this->offValue]);
                     $model->setAttributes(
                         [$attribute => $model->$attribute == $this->offValue ? $this->onValue : $this->offValue]
@@ -116,7 +116,7 @@ class ToggleAction extends Action
                     }
                 }
             } else {
-                if ($model->$attribute == $this->offValue or $this->allowAllOff) {
+                if ($model->$attribute == $this->offValue || $this->allowAllOff) {
                     $cond = is_callable($this->condition) ? call_user_func($this->condition, $model) : $this->condition;
                     $model->updateAll([$attribute => $this->offValue], $cond);
                     $model->setAttributes(
