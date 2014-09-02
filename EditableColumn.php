@@ -52,7 +52,7 @@ class EditableColumn extends DataColumn
      /**
      * @var string the language of editor
      */
-    public $language='en';
+    public $language=null;
 
     /**
      * @inheritdoc
