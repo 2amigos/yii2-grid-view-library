@@ -48,11 +48,11 @@ class EditableColumn extends DataColumn
      * @var string the type of editor
      */
     public $type = 'text';
-    
-     /**
+
+    /**
      * @var string the language of editor
      */
-    public $language=null;
+    public $language = null;
 
     /**
      * @inheritdoc
@@ -82,17 +82,17 @@ class EditableColumn extends DataColumn
     {
 
         $value = parent::renderDataCellContent($model, $key, $index);
-        if(is_callable($this->editableOptions)){
-             $opts=call_user_func($this->editableOptions, $model, $key, $index);
-             foreach ($opts as $prop => $v) {
+        if (is_callable($this->editableOptions)) {
+            $opts = call_user_func($this->editableOptions, $model, $key, $index);
+            foreach ($opts as $prop => $v) {
                 $this->options['data-' . $prop] = $v;
             }
-        }elseif(is_array($this->editableOptions)){
+        } elseif (is_array($this->editableOptions)) {
             foreach ($this->editableOptions as $prop => $v) {
                 $this->options['data-' . $prop] = $v;
             }
         }
-        
+
         $url = (array)$this->url;
         $this->options['data-url'] = Url::to($url);
         $this->options['data-pk'] = $key;
