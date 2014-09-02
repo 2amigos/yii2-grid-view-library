@@ -22,6 +22,7 @@ class EditableColumnAsset extends AssetBundle
 
     public $depends = [
         'yii\web\YiiAsset',
+        'dosamigos\assets\DosAmigosAsset',
     ];
 
 } 

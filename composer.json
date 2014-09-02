@@ -13,7 +13,8 @@
     ],
     "require": {
         "yiisoft/yii2": "*",
-        "2amigos/yii2-editable-widget": "*"
+        "2amigos/yii2-editable-widget": "*",
+        "2amigos/yii2-dosamigos-asset-bundle": "0.1.*"
     },
     "autoload": {
         "psr-4": {
