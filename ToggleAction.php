@@ -57,7 +57,9 @@ class ToggleAction extends Action
         if (Yii::$app->request->isAjax) {
 
             $model = $this->findModel($id);
-            $model->$attribute = ($model->$attribute == $this->offValue) ? $this->onValue : $this->offValue;
+            $model->setAttributes([$attribute => $model->$attribute == $this->offValue ? $this->onValue : $this->offValue]);
+            
+            // Can also be handled by ContentNegotiator
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($model->save(false, [$attribute])) {
                 return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
@@ -79,7 +81,7 @@ class ToggleAction extends Action
     protected function findModel($id)
     {
         $class = $this->modelClass;
-        if ($id !== null && ($model = $class::find($id)) !== null) {
+        if ($id !== null && ($model = $class::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));

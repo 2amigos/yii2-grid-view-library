@@ -13,7 +13,7 @@ dosamigos.toggleColumn = (function ($) {
         onTitle: 'On',
         offTitle: 'Off',
         registerHandler: function (grid, selector, cb) {
-            $(document).on('click.toggleColumn', selector, function (e) {
+            $(document).off('click.toggleColumn', selector).on('click.toggleColumn', selector, function (e) {
                 e.preventDefault();
                 var $self = $(this);
                 var url = $self.attr('href');
@@ -26,8 +26,8 @@ dosamigos.toggleColumn = (function ($) {
                             .attr('title', data.value ? pub.onTitle : pub.offTitle);
                         $.isFunction(cb) && cb(true, data);
                     },
-                    error: function () {
-                        $.isFunction(cb) && cb(false, data);
+                    error: function (xhr) {
+                        $.isFunction(cb) && cb(false, xhr);
                     }
                 });
                 return false;
