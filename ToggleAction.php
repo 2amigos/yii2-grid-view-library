@@ -102,29 +102,34 @@ class ToggleAction extends Action
                 $model->setAttributes(
                     [$attribute => $model->$attribute == $this->offValue ? $this->onValue : $this->offValue]
                 );
-                if ($model->save(false, [$attribute])) {
+                if ($model->validate() && $model->save(false, [$attribute])) {
                     return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
                 }
             } elseif ($this->toggleType == self::TOGGLE_UNIQ) {
-                if ($model->$attribute == $this->offValue || $this->allowAllOff) {
-                    $model->updateAll([$attribute => $this->offValue]);
+                if ($model->$attribute == $this->offValue || $this->allowAllOff) { 
                     $model->setAttributes(
                         [$attribute => $model->$attribute == $this->offValue ? $this->onValue : $this->offValue]
                     );
-                    if ($model->save(false, [$attribute])) {
-                        return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
+                    if($model->validate()){
+                        $model->updateAll([$attribute => $this->offValue]);
+                        if ($model->save(false, [$attribute])) {
+                            return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
+                        }
                     }
                 }
             } else {
                 if ($model->$attribute == $this->offValue || $this->allowAllOff) {
                     $cond = is_callable($this->condition) ? call_user_func($this->condition, $model) : $this->condition;
-                    $model->updateAll([$attribute => $this->offValue], $cond);
                     $model->setAttributes(
                         [$attribute => $model->$attribute == $this->offValue ? $this->onValue : $this->offValue]
                     );
-                    if ($model->save(false, [$attribute])) {
+                    if($model->validate()){
+                        $model->updateAll([$attribute => $this->offValue], $cond);
+                        if ($model->save(false, [$attribute])) {
                         return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
+                        }
                     }
+                    
                 }
             }
 
