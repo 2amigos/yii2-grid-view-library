@@ -111,6 +111,7 @@ class ToggleAction extends Action
                         [$attribute => $model->$attribute == $this->offValue ? $this->onValue : $this->offValue]
                     );
                     if($model->validate()){
+                        /**may  be transaction?**/
                         $model->updateAll([$attribute => $this->offValue]);
                         if ($model->save(false, [$attribute])) {
                             return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
