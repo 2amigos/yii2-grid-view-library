@@ -66,8 +66,7 @@ class EditableColumn extends DataColumn
 
         parent::init();
 
-        if(!$this->format)
-        {
+        if (!$this->format) {
             $this->format = 'raw';
         }
 
