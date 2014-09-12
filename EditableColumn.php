@@ -66,7 +66,10 @@ class EditableColumn extends DataColumn
 
         parent::init();
 
-        $this->format = 'raw';
+        if(!$this->format)
+        {
+            $this->format = 'raw';
+        }
 
         $rel = $this->attribute . '_editable' . $this->classSuffix;
         $this->options['pjax'] = '0';
