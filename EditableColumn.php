@@ -97,7 +97,7 @@ class EditableColumn extends DataColumn
 
         $url = (array)$this->url;
         $this->options['data-url'] = Url::to($url);
-        $this->options['data-pk'] = $key;
+        $this->options['data-pk'] = base64_encode(serialize($key));
         $this->options['data-name'] = $this->attribute;
         $this->options['data-type'] = $this->type;
 
