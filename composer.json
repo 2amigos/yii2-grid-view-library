@@ -1,24 +1,50 @@
 {
     "name": "2amigos/yii2-grid-view-library",
-    "description": "GridView Widget Extensions for Yii2.",
-    "keywords": ["yii", "extension", "widget", "grid"],
+    "description": "The GridView widget extensions for the Yii framework",
+    "keywords": [
+        "2amigos",
+        "yii",
+        "yii2",
+        "yii 2",
+        "widget",
+        "grid"
+    ],
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
+    "homepage": "https://github.com/2amigos/yii2-grid-view-library",
     "authors": [
         {
-            "name": "Antonio Ramirez",
-            "email": "ramirez.cobos@gmail.com",
-            "homepage": "http://2amigos.us"
+            "name": "Alexander Kochetov",
+            "email": "creocoder@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "2amigOS! Consulting Group",
+            "email": "hola@2amigos.us",
+            "homepage": "http://2amigos.us",
+            "role": "Developer"
         }
     ],
     "require": {
-        "yiisoft/yii2": "*",
-        "2amigos/yii2-editable-widget": "*",
-        "2amigos/yii2-dosamigos-asset-bundle": "0.1.*"
+        "yiisoft/yii2": "~2.0.0",
+        "2amigos/yii2-dosamigos-asset-bundle": "~1.0",
+        "2amigos/yii2-editable-widget": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
     },
     "autoload": {
         "psr-4": {
-            "dosamigos\\grid\\": ""
+            "dosamigos\\grid\\": "src"
+        }
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        },
+        "branch-alias": {
+            "dev-master": "1.0-dev"
         }
     }
 }

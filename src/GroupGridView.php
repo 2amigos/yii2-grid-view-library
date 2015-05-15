@@ -1,9 +1,10 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 2amigOS! Consulting Group LLC
- * @link http://2amigos.us
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @link https://github.com/2amigos/yii2-grid-view-library
+ * @copyright Copyright (c) 2013-2015 2amigOS! Consulting Group LLC
+ * @license http://opensource.org/licenses/BSD-3-Clause
  */
+
 namespace dosamigos\grid;
 
 use Closure;
@@ -388,4 +389,4 @@ class GroupGridView extends GridView
         }
         return null;
     }
-} 
+}

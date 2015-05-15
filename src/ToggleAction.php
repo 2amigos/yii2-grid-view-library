@@ -1,9 +1,10 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 2amigOS! Consulting Group LLC
- * @link http://2amigos.us
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @link https://github.com/2amigos/yii2-grid-view-library
+ * @copyright Copyright (c) 2013-2015 2amigOS! Consulting Group LLC
+ * @license http://opensource.org/licenses/BSD-3-Clause
  */
+
 namespace dosamigos\grid;
 
 use Yii;
@@ -106,7 +107,7 @@ class ToggleAction extends Action
                     return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
                 }
             } elseif ($this->toggleType == self::TOGGLE_UNIQ) {
-                if ($model->$attribute == $this->offValue || $this->allowAllOff) { 
+                if ($model->$attribute == $this->offValue || $this->allowAllOff) {
                     $model->setAttributes(
                         [$attribute => $model->$attribute == $this->offValue ? $this->onValue : $this->offValue]
                     );
@@ -130,7 +131,7 @@ class ToggleAction extends Action
                         return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
                         }
                     }
-                    
+
                 }
             }
 
@@ -157,4 +158,4 @@ class ToggleAction extends Action
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
         }
     }
-} 
+}
