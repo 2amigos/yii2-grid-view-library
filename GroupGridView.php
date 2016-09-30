@@ -160,25 +160,25 @@ class GroupGridView extends GridView
             // this changeOccured related to foreach below. It is required only for mergeType == self::MERGE_NESTED,
             // to write change for all nested columns when change of previous column occurred
             $changeOccurred = false;
-            foreach ($rowValues as $name => $value) {
+            foreach ($rowValues as $columnName => $columnValue) {
                 // value changed
-                $valueChanged = in_array($name, $changedColumns);
+                $valueChanged = in_array($columnName, $changedColumns);
                 //change already occured in this loop and mergeType set to MERGE_NESTED
                 $saveChange = $valueChanged || ($changeOccurred && $this->type == self::MERGE_NESTED);
 
                 if ($extraRowColumnChanged || $saveChange) {
                     $changeOccurred = true;
-                    $lastIndex = count($groups[$name]) - 1;
+                    $lastIndex = count($groups[$columnName]) - 1;
 
                     //finalize prev group
-                    $groups[$name][$lastIndex]['end'] = $index - 1;
-                    $groups[$name][$lastIndex]['totals'] = $totals;
+                    $groups[$columnName][$lastIndex]['end'] = $index - 1;
+                    $groups[$columnName][$lastIndex]['totals'] = $totals;
 
                     //begin new group
-                    $groups[$name][] = array(
+                    $groups[$columnName][] = array(
                         'start' => $index,
-                        'column' => $name,
-                        'value' => $value,
+                        'column' => $columnName,
+                        'value' => $columnValue,
                     );
                 }
             }
