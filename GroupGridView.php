@@ -47,6 +47,16 @@ class GroupGridView extends GridView
      */
     public $type = self::MERGE_SIMPLE;
     /**
+     * Need to merge null values in columns? Default - merge on.
+     * @var boolean
+     */
+    public $doNotMergeEmptyValue = false;
+    /**
+     * Exclude column for the rule if [[GroupGridView::doNotMergeEmptyValue]] is true.
+     * @var array
+     */
+    public $mergeEmptyColumns = [];
+    /**
      * @var string the CSS class to use for the merged cells
      */
     public $mergeCellClass = 'groupview-merge-cells';
@@ -146,7 +156,9 @@ class GroupGridView extends GridView
             $changedColumns = [];
             foreach ($rowValues as $name => $value) {
                 $previous = end($groups[$name]);
-                if ($value != $previous['value']) {
+                if ($this->doNotMergeEmptyValue && empty($value) && !in_array($name, $this->mergeEmptyColumns, true)) {
+                    $changedColumns[] = $name;
+                } elseif ($value != $previous['value']) {
                     $changedColumns[] = $name;
                 }
             }
