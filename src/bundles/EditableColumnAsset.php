@@ -10,7 +10,7 @@
  * @link http://www.2amigos.us/
  */
 
-namespace dosamigos\grid;
+namespace dosamigos\grid\bundles;
 
 use yii\web\AssetBundle;
 
@@ -25,4 +25,4 @@ class EditableColumnAsset extends AssetBundle
         'dosamigos\assets\DosAmigosAsset',
     ];
 
-} 
+}

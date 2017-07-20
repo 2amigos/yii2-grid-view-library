@@ -14,6 +14,8 @@ nbproject
 .project
 .settings
 
+#vendor
+vendor
 
 # mac deployment helpers
 switch

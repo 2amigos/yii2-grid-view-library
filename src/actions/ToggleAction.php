@@ -4,7 +4,7 @@
  * @link http://2amigos.us
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
-namespace dosamigos\grid;
+namespace dosamigos\grid\actions;
 
 use Yii;
 use yii\base\Action;
@@ -106,7 +106,7 @@ class ToggleAction extends Action
                     return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
                 }
             } elseif ($this->toggleType == self::TOGGLE_UNIQ) {
-                if ($model->$attribute == $this->offValue || $this->allowAllOff) { 
+                if ($model->$attribute == $this->offValue || $this->allowAllOff) {
                     $model->setAttributes(
                         [$attribute => $model->$attribute == $this->offValue ? $this->onValue : $this->offValue]
                     );
@@ -130,7 +130,7 @@ class ToggleAction extends Action
                         return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
                         }
                     }
-                    
+
                 }
             }
 
@@ -157,4 +157,4 @@ class ToggleAction extends Action
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
         }
     }
-} 
+}

@@ -4,7 +4,7 @@
  * @link http://2amigos.us
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
-namespace dosamigos\grid;
+namespace dosamigos\grid\bundles;
 
 use yii\web\AssetBundle;
 
@@ -27,4 +27,4 @@ class ToggleColumnAsset extends AssetBundle
         'dosamigos\assets\DosAmigosAsset',
     ];
 
-} 
+}
