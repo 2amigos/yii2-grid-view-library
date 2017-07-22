@@ -11,16 +11,19 @@ namespace dosamigos\grid\bundles;
 
 use yii\web\AssetBundle;
 
-class EditableColumnAsset extends AssetBundle
+class ResizableColumnsBundle extends AssetBundle
 {
-    public $sourcePath = '@vendor/2amigos/yii2-grid-view-library/assets/editable';
+    public $sourcePath = '@vendor/2amigos/yii2-grid-view-library/assets/resizable';
 
     public $js = [
-        'js/dosamigos-editable.column.js'
+        'js/dobtco-resizable.columns.js'
+    ];
+
+    public $css = [
+        'css/dobtco-resizable.columns.css'
     ];
 
     public $depends = [
-        'yii\web\YiiAsset',
-        'dosamigos\assets\DosAmigosAsset',
+        'yii\web\JqueryAsset',
     ];
 }

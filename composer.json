@@ -14,17 +14,19 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "yiisoft/yii2": "*",
-        "2amigos/yii2-editable-widget": "*",
+        "yiisoft/yii2": "~2.0.5",
         "2amigos/yii2-dosamigos-asset-bundle": "0.1.*",
-        "bower-asset/jquery.floatThead": "^2.0",
-        "bower-asset/jquery-resizable-columns": "^0.2.3"
+        "bower-asset/jquery.floatThead": "^2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
         "friendsofphp/php-cs-fixer": "^2.0",
         "squizlabs/php_codesniffer": "*",
-        "phpmd/phpmd": "@stable"
+        "phpmd/phpmd": "@stable",
+        "2amigos/yii2-editable-widget": "~1.0"
+    },
+    "suggest": {
+        "2amigos/yii2-editable-widget": "Required for the EditableColumn"
     },
     "autoload": {
         "psr-4": {

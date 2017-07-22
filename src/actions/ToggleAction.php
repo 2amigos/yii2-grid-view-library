@@ -1,17 +1,20 @@
 <?php
-/**
- * @copyright Copyright (c) 2014 2amigOS! Consulting Group LLC
- * @link http://2amigos.us
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+
+/*
+ * This file is part of the 2amigos/yii2-grid-library project.
+ * (c) 2amigOS! <http://2amigos.us/>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  */
+
 namespace dosamigos\grid\actions;
 
 use Yii;
 use yii\base\Action;
 use yii\base\InvalidConfigException;
-use yii\web\Response;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 /**
  * ToggleAction works in conjunction with ToggleColumn to ease the task to update the model.
@@ -58,8 +61,8 @@ class ToggleAction extends Action
 
     /**
      * @var mixed (array|string|callable) $condition the conditions that will be put in the WHERE part of the UPDATE SQL
-     * (used where $toggleType=ToggleAction::TOGGLE_COND)
-     * Please refer to [[Query::where()]] on how to specify this parameter.
+     *            (used where $toggleType=ToggleAction::TOGGLE_COND)
+     *            Please refer to [[Query::where()]] on how to specify this parameter.
      *
      * @example
      * ['another_attribute'=>20]
@@ -110,7 +113,7 @@ class ToggleAction extends Action
                     $model->setAttributes(
                         [$attribute => $model->$attribute == $this->offValue ? $this->onValue : $this->offValue]
                     );
-                    if($model->validate()){
+                    if ($model->validate()) {
                         /**may  be transaction?**/
                         $model->updateAll([$attribute => $this->offValue]);
                         if ($model->save(false, [$attribute])) {
@@ -124,37 +127,33 @@ class ToggleAction extends Action
                     $model->setAttributes(
                         [$attribute => $model->$attribute == $this->offValue ? $this->onValue : $this->offValue]
                     );
-                    if($model->validate()){
+                    if ($model->validate()) {
                         $model->updateAll([$attribute => $this->offValue], $cond);
                         if ($model->save(false, [$attribute])) {
-                        return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
+                            return ['result' => true, 'value' => ($model->$attribute == $this->onValue)];
                         }
                     }
-
                 }
             }
 
             return ['result' => false, 'errors' => $model->getErrors()];
-
-        } else {
-            throw new BadRequestHttpException(Yii::t('app', 'Invalid request'));
         }
+        throw new BadRequestHttpException(Yii::t('app', 'Invalid request'));
     }
 
     /**
      * Finds the model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return \yii\db\ActiveRecord the loaded model
+     * @param  integer               $id
      * @throws NotFoundHttpException if the model cannot be found
+     * @return \yii\db\ActiveRecord  the loaded model
      */
     protected function findModel($id)
     {
         $class = $this->modelClass;
         if ($id !== null && ($model = $class::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
         }
+        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 }

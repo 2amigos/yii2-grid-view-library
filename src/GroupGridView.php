@@ -1,9 +1,12 @@
 <?php
-/**
- * @copyright Copyright (c) 2014 2amigOS! Consulting Group LLC
- * @link http://2amigos.us
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+
+/*
+ * This file is part of the 2amigos/yii2-grid-library project.
+ * (c) 2amigOS! <http://2amigos.us/>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  */
+
 namespace dosamigos\grid;
 
 use Closure;
@@ -56,8 +59,8 @@ class GroupGridView extends GridView
     public $extraRowColumns = [];
     /**
      * @var string|\Closure an anonymous function that returns the value to be displayed for every extra row.
-     * The signature of this function is `function ($model, $index, $totals)`.
-     * If this is not set, `$model[$attribute]` will be used to obtain the value.
+     *                      The signature of this function is `function ($model, $index, $totals)`.
+     *                      If this is not set, `$model[$attribute]` will be used to obtain the value.
      *
      * You may also set this property to a string representing the attribute name to be displayed in this column.
      * This can be used when the attribute to be displayed is different from the [[attribute]] that is used for
@@ -66,12 +69,12 @@ class GroupGridView extends GridView
     public $extraRowValue;
     /**
      * @var string the position of the extra row. Possible values are [[GroupGridView::POS_ABOVE]] or
-     * [[GroupGridView::POS_BELOW]]
+     *             [[GroupGridView::POS_BELOW]]
      */
     public $extraRowPosition = self::POS_ABOVE;
     /**
      * @var \Closure an anonymous function that returns a calculated value of the totals. Its signature is
-     * `function($model, $index, $totals)`
+     *               `function($model, $index, $totals)`
      */
     public $extraRowTotalsValue;
     /**
@@ -151,11 +154,9 @@ class GroupGridView extends GridView
                 }
             }
 
-
             // if this flag is true we will write change for all grouped columns. Its required when a change of any
             // column from extraRowColumns occurs
             $extraRowColumnChanged = (count(array_intersect($changedColumns, $this->extraRowColumns)) > 0);
-
 
             // this changeOccured related to foreach below. It is required only for mergeType == self::MERGE_NESTED,
             // to write change for all nested columns when change of previous column occurred
@@ -175,15 +176,15 @@ class GroupGridView extends GridView
                     $groups[$name][$lastIndex]['totals'] = $totals;
 
                     //begin new group
-                    $groups[$name][] = array(
+                    $groups[$name][] = [
                         'start' => $index,
                         'column' => $name,
                         'value' => $value,
-                    );
+                    ];
                 }
             }
 
-            if($extraRowColumnChanged) {
+            if ($extraRowColumnChanged) {
                 $totals = [];
             }
             $totals = $this->getExtraRowTotals($model, $index, $totals);
@@ -216,7 +217,6 @@ class GroupGridView extends GridView
         $cells = [];
         /** @var \yii\grid\Column $column */
         foreach ($this->columns as $column) {
-
             $name = property_exists($column, 'attribute') ? $column->attribute : null;
 
             $isGroupColumn = in_array($name, $this->mergeColumns);
@@ -261,10 +261,10 @@ class GroupGridView extends GridView
 
     /**
      * Renders extra row when required
-     * @param mixed $model
-     * @param mixed $key
-     * @param int $index
-     * @param number $totals
+     * @param  mixed  $model
+     * @param  mixed  $key
+     * @param  int    $index
+     * @param  number $totals
      * @return string the extra row
      */
     protected function renderExtraRow($model, $key, $index, $totals)
@@ -289,13 +289,13 @@ class GroupGridView extends GridView
 
     /**
      * Is current row start or end of group in particular column
-     * @param string $name the column name
-     * @param int $row the row index
+     * @param  string $name the column name
+     * @param  int    $row  the row index
      * @return array
      */
     protected function isGroupEdge($name, $row)
     {
-        $result = array();
+        $result = [];
         foreach ($this->_groups[$name] as $column) {
             if ($column['start'] == $row) {
                 $result['start'] = $row;
@@ -305,7 +305,9 @@ class GroupGridView extends GridView
                 $result['end'] = $row;
                 $result['group'] = $column;
             }
-            if (count($result)) break;
+            if (count($result)) {
+                break;
+            }
         }
         return $result;
     }
@@ -313,9 +315,9 @@ class GroupGridView extends GridView
     /**
      * If there is a Closure will return the newly calculated totals on the Closure according to the code specified by
      * the user.
-     * @param mixed $model the data model being rendered
-     * @param int $index the zero-based index of the data model among the models array
-     * @param array $totals the calculated totals by the Closure
+     * @param  mixed       $model  the data model being rendered
+     * @param  int         $index  the zero-based index of the data model among the models array
+     * @param  array       $totals the calculated totals by the Closure
      * @return array|mixed
      */
     protected function getExtraRowTotals($model, $index, $totals)
@@ -327,9 +329,9 @@ class GroupGridView extends GridView
 
     /**
      * Returns the row values of the column
-     * @param array $columns the columns
-     * @param mixed $model the model
-     * @param int $index the zero-base index of the model among the models array
+     * @param  array $columns the columns
+     * @param  mixed $model   the model
+     * @param  int   $index   the zero-base index of the model among the models array
      * @return array
      */
     protected function getRowValues($columns, $model, $index = 0)
@@ -348,44 +350,41 @@ class GroupGridView extends GridView
 
     /**
      * Returns the column data cell content
-     * @param \yii\grid\DataColumn $column
-     * @param mixed $model the data model being rendered
-     * @param mixed $key the key associated with the data model
-     * @param int $index the zero-based index of the data model among the models array returned by [[GridView::dataProvider]]
-     * @return string the rendering result
+     * @param  \yii\grid\DataColumn $column
+     * @param  mixed                $model  the data model being rendered
+     * @param  mixed                $key    the key associated with the data model
+     * @param  int                  $index  the zero-based index of the data model among the models array returned by [[GridView::dataProvider]]
+     * @return string               the rendering result
      */
     protected function getColumnDataCellContent($column, $model, $key, $index)
     {
         if ($column->content === null) {
             return $this->formatter->format($this->getColumnDataCellValue($column, $model, $key, $index), $column->format);
-        } else {
-            if ($column->content !== null) {
-                return call_user_func($column->content, $model, $key, $index, $column);
-            } else {
-                return $this->emptyCell;
-            }
         }
+        if ($column->content !== null) {
+            return call_user_func($column->content, $model, $key, $index, $column);
+        }
+        return $this->emptyCell;
     }
 
     /**
      * Returns the column data cell value
-     * @param \yii\grid\DataColumn $column
-     * @param mixed $model the data model being rendered
-     * @param mixed $key the key associated with the data model
-     * @param int $index the zero-based index of the data model among the models array
-     * @return mixed|null the result
+     * @param  \yii\grid\DataColumn $column
+     * @param  mixed                $model  the data model being rendered
+     * @param  mixed                $key    the key associated with the data model
+     * @param  int                  $index  the zero-based index of the data model among the models array
+     * @return mixed|null           the result
      */
     protected function getColumnDataCellValue($column, $model, $key, $index)
     {
         if ($column->value !== null) {
             if (is_string($column->value)) {
                 return ArrayHelper::getValue($model, $column->value);
-            } else {
-                return call_user_func($column->value, $model, $index, $column);
             }
+            return call_user_func($column->value, $model, $index, $column);
         } elseif ($column->attribute !== null) {
             return ArrayHelper::getValue($model, $column->attribute);
         }
         return null;
     }
-} 
+}

@@ -1,9 +1,12 @@
 <?php
-/**
- * @copyright Copyright (c) 2014 2amigOS! Consulting Group LLC
- * @link http://2amigos.us
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+
+/*
+ * This file is part of the 2amigos/yii2-grid-library project.
+ * (c) 2amigOS! <http://2amigos.us/>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  */
+
 namespace dosamigos\grid\bundles;
 
 use yii\web\AssetBundle;
@@ -26,5 +29,4 @@ class ToggleColumnAsset extends AssetBundle
         'yii\web\YiiAsset',
         'dosamigos\assets\DosAmigosAsset',
     ];
-
 }

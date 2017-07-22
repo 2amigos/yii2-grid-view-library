@@ -1,27 +1,25 @@
 <?php
-/**
- * @copyright Copyright (c) 2014 2amigOS! Consulting Group LLC
- * @link http://2amigos.us
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- */
-namespace dosamigos\grid;
 
+/*
+ * This file is part of the 2amigos/yii2-grid-library project.
+ * (c) 2amigOS! <http://2amigos.us/>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace dosamigos\grid\columns;
+
+use dosamigos\grid\bundles\ToggleColumnAsset;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\grid\DataColumn;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
 /**
  * ToggleColumn Allows to modify the value of column on the fly. This type of column is good when you wish to modify
  * the value of a displayed model that has two states: yes-no, true-false, 1-0, etc...
- *
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @link http://www.ramirezcobos.com/
- * @link http://www.2amigos.us/
- * @package dosamigos\grid
  */
 class ToggleColumn extends DataColumn
 {
@@ -31,27 +29,27 @@ class ToggleColumn extends DataColumn
     public $onValue = 1;
     /**
      * @var string the label for the toggle button. Defaults to "Check".
-     * Note that the label will not be HTML-encoded when rendering.
+     *             Note that the label will not be HTML-encoded when rendering.
      */
     public $onLabel;
     /**
      * @var string the label for the toggle button. Defaults to "Uncheck".
-     * Note that the label will not be HTML-encoded when rendering.
+     *             Note that the label will not be HTML-encoded when rendering.
      */
     public $offLabel;
     /**
      * @var string the label for the NULL value toggle button. Defaults to "Not Set".
-     * Note that the label will not be HTML-encoded when rendering.
+     *             Note that the label will not be HTML-encoded when rendering.
      */
     public $emptyLabel;
     /**
      * @var string the glyph icon toggle button "checked" state.
-     * You may set this property to be false to render a text link instead.
+     *             You may set this property to be false to render a text link instead.
      */
     public $onIcon = 'glyphicon glyphicon-ok-circle';
     /**
      * @var string the glyph icon toggle button "unchecked" state.
-     * You may set this property to be false to render a text link instead.
+     *             You may set this property to be false to render a text link instead.
      */
     public $offIcon = 'glyphicon glyphicon-remove-circle';
     /**
@@ -92,7 +90,6 @@ class ToggleColumn extends DataColumn
      * @var string suffix substituted to a name class of the tag <a>
      */
     public $classSuffix;
-
 
     /**
      * @inheritdoc
@@ -184,4 +181,4 @@ class ToggleColumn extends DataColumn
 
         $view->registerJs(implode("\n", $js));
     }
-} 
+}

@@ -1,11 +1,13 @@
 <?php
-/**
- * @copyright Copyright (c) 2014 2amigOS! Consulting Group LLC
- * @link http://2amigos.us
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- */
-namespace dosamigos\grid;
 
+/*
+ * This file is part of the 2amigos/yii2-grid-library project.
+ * (c) 2amigOS! <http://2amigos.us/>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace dosamigos\grid\columns;
 
 use dosamigos\editable\EditableAddressAsset;
 use dosamigos\editable\EditableBootstrapAsset;
@@ -14,25 +16,20 @@ use dosamigos\editable\EditableDatePickerAsset;
 use dosamigos\editable\EditableDateTimePickerAsset;
 use dosamigos\editable\EditableSelect2Asset;
 use dosamigos\editable\EditableWysiHtml5Asset;
+use dosamigos\grid\bundles\EditableColumnAsset;
 use yii\base\InvalidConfigException;
 use yii\grid\DataColumn;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
 /**
  * EditableColumn adds X-Editable capabilities to a column
- *
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @link http://www.ramirezcobos.com/
- * @link http://www.2amigos.us/
- * @package dosamigos\grid
  */
 class EditableColumn extends DataColumn
 {
     /**
      * @var array the options for the X-editable.js plugin.
-     * Please refer to the X-editable.js plugin web page for possible options.
+     *            Please refer to the X-editable.js plugin web page for possible options.
      * @see http://vitalets.github.io/x-editable/docs.html#editable
      */
     public $editableOptions = [];
@@ -82,7 +79,6 @@ class EditableColumn extends DataColumn
      */
     protected function renderDataCellContent($model, $key, $index)
     {
-
         $value = parent::renderDataCellContent($model, $key, $index);
         if (is_callable($this->editableOptions)) {
             $opts = call_user_func($this->editableOptions, $model, $key, $index);
@@ -158,4 +154,4 @@ class EditableColumn extends DataColumn
         $js[] = "dosamigos.editableColumn.registerHandler('$grid', '$selector');";
         $view->registerJs(implode("\n", $js));
     }
-} 
+}
