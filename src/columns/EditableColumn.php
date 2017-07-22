@@ -18,7 +18,6 @@ use dosamigos\editable\EditableSelect2Asset;
 use dosamigos\editable\EditableWysiHtml5Asset;
 use dosamigos\grid\bundles\EditableColumnAsset;
 use yii\base\InvalidConfigException;
-use yii\grid\DataColumn;
 use yii\helpers\Html;
 use yii\helpers\Url;
 

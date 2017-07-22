@@ -25,5 +25,6 @@ class ResizableColumnsBundle extends AssetBundle
 
     public $depends = [
         'yii\web\JqueryAsset',
+        'dosamigos\grid\bundles\ResizableStoreAsset'
     ];
 }

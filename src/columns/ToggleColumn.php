@@ -13,7 +13,6 @@ use dosamigos\grid\bundles\ToggleColumnAsset;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
-use yii\grid\DataColumn;
 use yii\helpers\Html;
 use yii\helpers\Url;
 

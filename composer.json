@@ -16,7 +16,8 @@
     "require": {
         "yiisoft/yii2": "~2.0.5",
         "2amigos/yii2-dosamigos-asset-bundle": "0.1.*",
-        "bower-asset/jquery.floatThead": "^2.0"
+        "bower-asset/jquery.floatThead": "^2.0",
+        "bower-asset/store.js": "~1.3"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",

@@ -9,7 +9,6 @@
 
 namespace dosamigos\grid\columns;
 
-use yii\grid\DataColumn;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 

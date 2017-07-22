@@ -20,11 +20,6 @@ use yii\helpers\Html;
  *
  * A grid view that groups rows by any column(s). Yii2 ported version of
  * [Vitalets GroupGridView](https://github.com/vitalets/groupgridview)
- *
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @link http://www.ramirezcobos.com/
- * @link http://www.2amigos.us/
- * @package dosamigos\grid
  */
 class GroupGridView extends GridView
 {

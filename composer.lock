@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ddd2f53ed9c77f98257adea9a1e28184",
+    "content-hash": "0d8095196ba70d1e3a1eb047ad2fc6e6",
     "packages": [
         {
             "name": "2amigos/yii2-dosamigos-asset-bundle",
@@ -213,6 +213,26 @@
                     "package.json"
                 ]
             }
+        },
+        {
+            "name": "bower-asset/store.js",
+            "version": "v1.3.20",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/marcuswestin/store.js.git",
+                "reference": "15b925d60f817b359d2373b2331333d74ae7d97f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/marcuswestin/store.js/zipball/15b925d60f817b359d2373b2331333d74ae7d97f",
+                "reference": "15b925d60f817b359d2373b2331333d74ae7d97f",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "store.js"
+            },
+            "description": "A localStorage wrapper for all browsers without using cookies or flash. Uses localStorage, globalStorage, and userData behavior under the hood"
         },
         {
             "name": "bower-asset/yii2-pjax",
