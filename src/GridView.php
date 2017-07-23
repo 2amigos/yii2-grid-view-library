@@ -12,6 +12,7 @@ namespace dosamigos\grid;
 use dosamigos\grid\contracts\RegistersClientScriptInterface;
 use yii\base\Behavior;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 class GridView extends \yii\grid\GridView
 {
@@ -19,6 +20,15 @@ class GridView extends \yii\grid\GridView
      * @var Behavior[]|array the attached behaviors (behavior name => behavior).
      */
     private $_behaviors = [];
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        Html::addCssClass($this->tableOptions, 'dosamigos-grid-view-table');
+        parent::init();
+    }
 
     /**
      * @inheritdoc

@@ -9,8 +9,10 @@
 
 namespace dosamigos\grid\behaviors;
 
+use dosamigos\grid\bundles\ResizableColumnsBundle;
 use dosamigos\grid\contracts\RegistersClientScriptInterface;
 use yii\base\Behavior;
+use yii\grid\GridView;
 
 class ResizableColumnsBehavior extends Behavior implements RegistersClientScriptInterface
 {
@@ -20,9 +22,20 @@ class ResizableColumnsBehavior extends Behavior implements RegistersClientScript
     public $store = true;
 
     /**
-     *
+     * @inheritdoc
      */
     public function registerClientScript()
     {
+        /** @var GridView $owner */
+        $owner = $this->owner;
+
+        $id = $owner->getId();
+        $view = $owner->getView();
+
+        ResizableColumnsBundle::register($view);
+
+        $options = $this->store === true ? '{store: window.store}' : '';
+
+        $view->registerJs(";jQuery('#$id > table.dosamigos-grid-view-table').resizableColumns($options);");
     }
 }
