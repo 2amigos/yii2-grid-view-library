@@ -30,7 +30,6 @@ class FloatHeaderBehavior extends Behavior implements RegistersClientScriptInter
     public $clientOptions = [
         'top' => 50
     ];
-
     /**
      * @var array $clientEvents the events of the underlying floatThead jquery plugin. For example, to set the
      *            floatThead event:
@@ -65,10 +64,10 @@ class FloatHeaderBehavior extends Behavior implements RegistersClientScriptInter
             : '';
 
         $id = $owner->getId();
-        $js[] = ";jQuery('#$id > table').floatThead($options);";
+        $js[] = ";jQuery('#$id > table.dosamigos-grid-view-table').floatThead($options);";
         if (!empty($this->clientEvents)) {
             foreach ($this->clientEvents as $event => $handler) {
-                $js[] = "jQuery('#$id').on('$event', $handler);";
+                $js[] = "jQuery('#$id > table.dosamigos-grid-view-table').on('$event', $handler);";
             }
         }
         $view->registerJs(implode("\n", $js));

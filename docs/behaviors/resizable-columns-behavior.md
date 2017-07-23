@@ -10,6 +10,8 @@ so to be able to work with GridView tables.
 
 It has a `clientOptions` attribute that you can set to configure the options available on the plugin (check its source)
 
+> **Note** This behavior has conflicts when used with [FloatHeaderBehavior](float-header-behavior.md).
+
 ### Usage
 
 Simply attach it to the GridView widget like this: 
