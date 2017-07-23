@@ -42,8 +42,7 @@ class ImageColumn extends DataColumn
             $this->format = 'html';
         }
 
-        if(!empty($this->path) )
-        {
+        if (!empty($this->path)) {
             $this->path = mb_substr($this->path, -1) == '/'
                 ? ''
                 : '/';

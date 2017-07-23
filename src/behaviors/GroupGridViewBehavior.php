@@ -1,13 +1,19 @@
 <?php
 
+/*
+ * This file is part of the 2amigos/yii2-grid-view-library project.
+ * (c) 2amigOS! <http://2amigos.us/>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace dosamigos\grid\behaviors;
 
-
+use Closure;
 use yii\base\Behavior;
 use yii\grid\DataColumn;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
-use Closure;
 use yii\helpers\Html;
 
 class GroupGridViewBehavior extends Behavior
@@ -132,9 +138,8 @@ class GroupGridViewBehavior extends Behavior
             $colspan = count($grid->columns);
 
             return "<tbody>\n<tr><td colspan=\"$colspan\">" . $grid->renderEmpty() . "</td></tr>\n</tbody>";
-        } else {
-            return "<tbody>\n" . implode("\n", $rows) . "\n</tbody>";
         }
+        return "<tbody>\n" . implode("\n", $rows) . "\n</tbody>";
     }
 
     /**
@@ -260,7 +265,6 @@ class GroupGridViewBehavior extends Behavior
         $cells = [];
         /** @var \yii\grid\Column $column */
         foreach ($grid->columns as $column) {
-
             $name = ArrayHelper::getValue($column, 'attribute');
 
             $isGroupColumn = in_array($name, $this->mergeColumns);

@@ -46,7 +46,6 @@ class LabelColumn extends DataColumn
         $value = parent::getDataCellValue($model, $key, $index);
 
         if (isset($this->labels[$value])) {
-
             $text = ArrayHelper::getValue($this->labels, "$value.label", $value);
             $options = ArrayHelper::getValue($this->labels, "$value.options", ['class' => 'label-default']);
 
