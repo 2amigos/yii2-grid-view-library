@@ -151,6 +151,7 @@ class EditableColumn extends DataColumn
         $grid = "#{$this->grid->id}";
         $script = ";jQuery('$selector').editable();";
         $hash = hash('crc32', $script);
+        $js = [];
         $js[] = $script;
         $js[] = "dosamigos.editableColumn.registerHandler('$grid', '$selector', '$hash');";
         $view->registerJs(implode("\n", $js));

@@ -102,13 +102,27 @@ class ToggleColumn extends DataColumn
 
         parent::init();
         Html::addCssClass($this->headerOptions, 'toggle-column');
-        Html::addCssClass($this->contentOptions, 'toggle-column');
         Html::addCssClass($this->footerOptions, 'toggle-column');
         $this->format = 'raw';
-        $this->onLabel = $this->onLabel ? : Yii::t('app', 'On');
-        $this->offLabel = $this->offLabel ? : Yii::t('app', 'Off');
-        $this->emptyLabel = $this->emptyLabel ? : Yii::t('app', 'Not set');
+        $this->onLabel = $this->onLabel ?: Yii::t('app', 'On');
+        $this->offLabel = $this->offLabel ?: Yii::t('app', 'Off');
+        $this->emptyLabel = $this->emptyLabel ?: Yii::t('app', 'Not set');
         $this->registerClientScript();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function renderDataCell($model, $key, $index)
+    {
+        if ($this->contentOptions instanceof \Closure) {
+            $options = call_user_func($this->contentOptions, $model, $key, $index, $this);
+        } else {
+            $options = $this->contentOptions;
+        }
+        Html::addCssClass($options, 'toggle-column');
+
+        return Html::tag('td', $this->renderDataCellContent($model, $key, $index), $options);
     }
 
     /**
@@ -150,6 +164,7 @@ class ToggleColumn extends DataColumn
 
     /**
      * @param $value
+     *
      * @return string
      */
     protected function getToggleText($value)
@@ -167,11 +182,12 @@ class ToggleColumn extends DataColumn
         ToggleColumnAsset::register($view);
         $grid = $this->grid->id;
         $selector = "#$grid a.{$this->attribute}_toggle$this->classSuffix";
-        $callback = $this->afterToggle ? : 'function(){}';
+        $callback = $this->afterToggle ?: 'function(){}';
 
         $onText = $this->asText ? $this->onLabel : Html::tag('span', '', ['class' => $this->onIcon]);
         $offText = $this->asText ? $this->offLabel : Html::tag('span', '', ['class' => $this->offIcon]);
 
+        $js = [];
         $js[] = "dosamigos.toggleColumn.onText='{$onText}'";
         $js[] = "dosamigos.toggleColumn.offText='{$offText}'";
         $js[] = "dosamigos.toggleColumn.onTitle='{$this->onLabel}'";

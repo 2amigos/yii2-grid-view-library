@@ -19,7 +19,7 @@ class GridView extends \yii\grid\GridView
     /**
      * @var Behavior[]|array the attached behaviors (behavior name => behavior).
      */
-    private $_behaviors = [];
+    private $gBehaviors = [];
 
     /**
      * @inheritdoc
@@ -35,7 +35,7 @@ class GridView extends \yii\grid\GridView
      */
     public function behaviors()
     {
-        return ArrayHelper::merge($this->_behaviors, parent::behaviors());
+        return ArrayHelper::merge($this->gBehaviors, parent::behaviors());
     }
 
     /**
@@ -45,7 +45,7 @@ class GridView extends \yii\grid\GridView
      */
     public function setBehaviors(array $behaviors = [])
     {
-        $this->_behaviors = $behaviors;
+        $this->gBehaviors = $behaviors;
     }
 
     /**
@@ -59,11 +59,14 @@ class GridView extends \yii\grid\GridView
     public function renderSection($name)
     {
         $method = 'render' . ucfirst(str_replace(['{', '}'], '', $name)); // methods are prefixed with 'render'!
+        $behaviors = $this->getBehaviors();
 
-        foreach ($this->getBehaviors() as $behavior) {
-            /** @var Object $behavior */
-            if ($behavior->hasMethod($method)) {
-                return call_user_func([$behavior, $method]);
+        if (is_array($behaviors)) {
+            foreach ($behaviors as $behavior) {
+                /** @var Object $behavior */
+                if ($behavior->hasMethod($method)) {
+                    return call_user_func([$behavior, $method]);
+                }
             }
         }
 
@@ -85,9 +88,13 @@ class GridView extends \yii\grid\GridView
      */
     protected function registerClientScript()
     {
-        foreach ($this->getBehaviors() as $behavior) {
-            if ($behavior instanceof RegistersClientScriptInterface) {
-                $behavior->registerClientScript();
+        $behaviors = $this->getBehaviors();
+
+        if (is_array($behaviors)) {
+            foreach ($behaviors as $behavior) {
+                if ($behavior instanceof RegistersClientScriptInterface) {
+                    $behavior->registerClientScript();
+                }
             }
         }
     }

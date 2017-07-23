@@ -33,10 +33,16 @@ class BooleanColumn extends DataColumn
     /**
      * @inheritdoc
      */
-    public function init()
+    public function renderDataCell($model, $key, $index)
     {
-        Html::addCssClass($this->contentOptions, 'text-center');
-        parent::init();
+        if ($this->contentOptions instanceof \Closure) {
+            $options = call_user_func($this->contentOptions, $model, $key, $index, $this);
+        } else {
+            $options = $this->contentOptions;
+        }
+
+        Html::addCssClass($options, 'text-center');
+        return Html::tag('td', $this->renderDataCellContent($model, $key, $index), $options);
     }
 
     /**

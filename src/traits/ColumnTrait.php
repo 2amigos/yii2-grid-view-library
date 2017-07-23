@@ -11,6 +11,9 @@ namespace dosamigos\grid\traits;
 
 use dosamigos\grid\GridView;
 
+/**
+ * @property GridView $grid the grid view object that owns this column.
+ */
 trait ColumnTrait
 {
     /**
@@ -25,9 +28,8 @@ trait ColumnTrait
      */
     public function renderHeaderCell()
     {
-        if (null !== $this->grid->filterModel && false === $this->filter &&
-            $this->rowSpanNoFilterHeaders = true &&
-            $this->grid->filterPosition === GridView::FILTER_POS_BODY) {
+        if (null !== $this->grid->filterModel && false === $this->filter && $this->rowSpanNoFilterHeaders = true &&
+                $this->grid->filterPosition === GridView::FILTER_POS_BODY) {
             $this->headerOptions['rowspan'] = 2;
         }
 
@@ -41,11 +43,11 @@ trait ColumnTrait
      */
     public function renderFilterCell()
     {
-        if (null !== $this->grid->filterModel && false === $this->filter &&
-            $this->rowSpanNoFilterHeaders = true &&
+        if (null !== $this->grid->filterModel && false === $this->filter && $this->rowSpanNoFilterHeaders = true &&
                 $this->grid->filterPosition === GridView::FILTER_POS_BODY) {
             return null;
         }
+
         return parent::renderFilterCell();
     }
 }

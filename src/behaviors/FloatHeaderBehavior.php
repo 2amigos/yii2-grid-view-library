@@ -63,6 +63,7 @@ class FloatHeaderBehavior extends Behavior implements RegistersClientScriptInter
             ? Json::encode($this->clientOptions)
             : '';
 
+        $js = [];
         $id = $owner->getId();
         $js[] = ";jQuery('#$id > table.dosamigos-grid-view-table').floatThead($options);";
         if (!empty($this->clientEvents)) {

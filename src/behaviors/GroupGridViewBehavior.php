@@ -304,7 +304,6 @@ class GroupGridViewBehavior extends Behavior
 
         $rows[] = Html::tag('tr', implode('', $cells), $options);
 
-        $extraRowEdge = null;
         if (count($this->extraRowColumns)) {
             $extraRowEdge = $this->isGroupEdge($this->extraRowColumns[0], $index);
             if ($this->extraRowPosition == static::POS_ABOVE && isset($extraRowEdge['start'])) {
