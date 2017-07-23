@@ -86,7 +86,13 @@ class ToolbarBehavior extends Behavior
         }
         $toolbar = Html::tag('div', implode("\n", $content), $this->options);
 
-        return Html::tag('div', $toolbar, $this->containerOptions);
+        $container = Html::tag('div', $toolbar, $this->containerOptions);
+
+        if (mb_strpos(ArrayHelper::getValue($this->containerOptions, 'class', ''), 'pull-right') !== false) {
+            $container .= '<div class="clearfix"></div>';
+        }
+
+        return $container;
     }
 
     /**
