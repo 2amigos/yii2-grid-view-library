@@ -33,7 +33,7 @@ like a `plugin` system and complies with the rules we wanted to implement:
 - Grid's code **MUST** be as clean as possible 
 - Grid's code **MUST NOT** have hardcoded enhancements that developers are force to override if they wish to enhance
 - Developers **SHOULD** be able to enhance or even replace entirely the resulting grid through behaviors. Yes! is 
-  possible without overriding a single line of code! Check [GroupGridViewBehavior](behaviors/group-grid-view-behavior.md)
+  possible without overriding a single line of code! Check [GroupColumnsBehavior](behaviors/group-columns-behavior.md)
 
 By following those rules, developers wouldn't have to wait for their pull requests to be accepted, they can simply 
 create their own behaviors and that's it, they will have their very own "**GRID ON ROIDS**".
@@ -81,7 +81,7 @@ A set of behaviors included into the library to show you how easy is to enhance 
 component. [Build your own!](guides/how-to-create-behaviors.md)
 
 - [FloatHeaderBehavior](behaviors/float-header-behavior.md)
-- [GroupGridViewBehavior](behaviors/group-grid-view-behavior.md)
+- [GroupColumnsBehavior](behaviors/group-columns-behavior.md)
 - [ResizableColumnsBehavior](behaviors/resizable-columns-behavior.md)
 - [ToolbarBehavior](behaviors/toolbar-behavior.md)
 

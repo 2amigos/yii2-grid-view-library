@@ -16,7 +16,7 @@ use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
-class GroupGridViewBehavior extends Behavior
+class GroupColumnsBehavior extends Behavior
 {
     const MERGE_SIMPLE = 'simple';
     const MERGE_NESTED = 'nested';

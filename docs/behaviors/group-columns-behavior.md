@@ -1,5 +1,5 @@
-GroupGridViewBehavior
-=====================
+GroupColumnsBehavior
+====================
 
 This behavior proves how you can override the grid's methods without the need to override the GridView class directly. 
 Is a ported version of the old `GroupGridView` widget that was previously on this library. 
@@ -19,7 +19,7 @@ It overrides the `renderItems()` method of the `GridView` widget, so the token i
 
 use dosamigos\grid\GridView;
 use yii\data\ArrayDataProvider;
-use dosamigos\grid\behaviors\GroupGridViewBehavior;
+use dosamigos\grid\behaviors\GroupColumnsBehavior;
 
 // create test data provider
 $data = [
@@ -43,7 +43,7 @@ echo GridView::widget(
     [
         'behaviors' => [
             [
-                'class' => 'GroupGridViewBehavior',
+                'class' => 'GroupColumnsBehavior',
                 // You an use multiple columns for extra row but remember that will affect the merging
                 // as both columns must be having same values for the extra row to title the records 
                 'extraRowColumns' => ['language'],
@@ -71,7 +71,7 @@ The behavior has an attribute that allows you to render the extra row contents a
 
 use dosamigos\grid\GridView;
 use yii\data\ArrayDataProvider;
-use dosamigos\grid\behaviors\GroupGridViewBehavior;
+use dosamigos\grid\behaviors\GroupColumnsBehavior;
 
 // create test data provider
 $data = [
@@ -95,7 +95,7 @@ echo GridView::widget(
     [
         'behaviors' => [
             [
-                'class' => 'GroupGridViewBehavior', 
+                'class' => 'GroupColumnsBehavior', 
                 'extraRowColumns' => ['language'],
                 'extraRowValue' => function($model, $key, $index, $totals) {
                     return '<span class="label label-warning">' . $model['language'] . '</span>';
