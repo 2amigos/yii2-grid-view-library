@@ -234,11 +234,11 @@ class GroupGridViewBehavior extends Behavior
                     $groups[$columnName][$lastIndex]['totals'] = $totals;
 
                     //begin new group
-                    $groups[$columnName][] = array(
+                    $groups[$columnName][] = [
                         'start' => $index,
                         'column' => $columnName,
                         'value' => $columnValue,
-                    );
+                    ];
                 }
             }
 
