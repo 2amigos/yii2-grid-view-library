@@ -14,13 +14,20 @@ use dosamigos\grid\GridView;
 trait ColumnTrait
 {
     /**
+     * @var bool
+     */
+    public $rowSpanNoFilterHeaders = false;
+
+    /**
      * Renders the header cell.
      *
      * @return string
      */
     public function renderHeaderCell()
     {
-        if (null !== $this->grid->filterModel && false === $this->filter && $this->grid->filterPosition === GridView::FILTER_POS_BODY) {
+        if (null !== $this->grid->filterModel && false === $this->filter &&
+            $this->rowSpanNoFilterHeaders = true &&
+            $this->grid->filterPosition === GridView::FILTER_POS_BODY) {
             $this->headerOptions['rowspan'] = 2;
         }
 
@@ -34,7 +41,9 @@ trait ColumnTrait
      */
     public function renderFilterCell()
     {
-        if ($this->grid->filterModel !== null && false === $this->filter && $this->grid->filterPosition === GridView::FILTER_POS_BODY) {
+        if (null !== $this->grid->filterModel && false === $this->filter &&
+            $this->rowSpanNoFilterHeaders = true &&
+                $this->grid->filterPosition === GridView::FILTER_POS_BODY) {
             return null;
         }
         return parent::renderFilterCell();
