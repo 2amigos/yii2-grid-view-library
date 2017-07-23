@@ -7,7 +7,12 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/2amigos/yii2-grid-view-library.svg?style=flat-square)](https://scrutinizer-ci.com/g/2amigos/yii2-grid-view-library)
 [![Total Downloads](https://img.shields.io/packagist/dt/2amigos/yii2-grid-view-library.svg?style=flat-square)](https://packagist.org/packages/2amigos/yii2-grid-view-library)
 
-This library holds extensions specifically created to enhance Yii2's GridView Widget. We expect it to grow... :)
+This library enhances the official grid library for Yii2 providing developers with the required tools to develop and 
+display beautiful interfaces for their reports.
+
+The GridView widget provides the mechanisms to be enhanced by behaviors. Developers can create their very 
+own GridView behaviors and extend the library without overriding and/or requiring to make push request to this 
+repository. 
 
 ## Installation
 
@@ -27,83 +32,9 @@ or add
 
 to the `require` section of your `composer.json` file.
 
-## Usage
+## Documentation 
 
-***Using ToggleColumn and ToggleAction***
-
-```
-// on your controller
-
-public function actions()
-{
-    return [
-        // ...
-        'toggle' => [
-            'class' => ToggleAction::className(),
-            'modelClass' => Lang::className(),
-            'onValue' => Lang::STATUS_ACTIVE,
-            'offValue' => Lang::STATUS_NOT_ACTIVE
-        ],
-        // ...
-    ];
-}
-
-
-// on your grid
-// ... other columns above?
-[
-    'class' => \dosamigos\grid\ToggleColumn::className(),
-    'attribute' => 'status',
-    'onValue' => Status::STATUS_ACTIVE,
-    'onLabel' => 'Active',
-    'offLabel' => 'Not active',
-    'contentOptions' => ['class' => 'text-center'],
-    'afterToggle' => 'function(r, data){if(r){console.log("done", data)};}',
-    'filter' => [
-        Status::STATUS_ACTIVE => 'Active',
-        Status::STATUS_DELETED => 'Not active'
-    ]
-],
-// ...
-```
-***Using EditableColumn and EditableAction***
-As you will soon realize, this column requires [2amigos/yii2-editable-widget](https://github.com/2amigos/yii2-editable-widget). So, for further information about the options you have to configure the Column please go to [the widget's repository](https://github.com/2amigos/yii2-editable-widget).
-
-```
-// on your controller
-
-public function actions()
-{
-    return [
-        // ...
-        'editable' => [
-            'class' => EditableAction::className(),
-            'modelClass' => Lang::className(),
-            'forceCreate' => false
-        ]
-        // ...
-    ];
-
-
-// on your grid
-// ... other columns above?
-[
-    'class' => \dosamigos\grid\EditableColumn::className(),
-    'attribute' => 'name',
-    'url' => ['editable'],
-    'type' => 'date',
-    'editableOptions' => [
-        'mode' => 'inline',
-    ]
-],
-// ...
-```
-
-## Testing
-
-```bash
-$ ./vendor/bin/phpunit
-```
+You can read the latest docs on [http://yii2-grid-view-library.readthedocs.io/en/latest/](http://yii2-grid-view-library.readthedocs.io/en/latest/)
 
 ## Contributing
 

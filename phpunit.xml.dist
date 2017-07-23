@@ -10,7 +10,7 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="Yii2 Croppie Test Suite">
+        <testsuite name="Yii2 GridView Library Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
