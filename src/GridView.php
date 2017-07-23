@@ -87,7 +87,7 @@ class GridView extends \yii\grid\GridView
     {
         foreach ($this->getBehaviors() as $behavior) {
             if ($behavior instanceof RegistersClientScriptInterface) {
-                $this->registerClientScript();
+                $behavior->registerClientScript();
             }
         }
     }
