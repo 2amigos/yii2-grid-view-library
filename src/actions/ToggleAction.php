@@ -18,11 +18,6 @@ use yii\web\Response;
 
 /**
  * ToggleAction works in conjunction with ToggleColumn to ease the task to update the model.
- *
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @link http://www.ramirezcobos.com/
- * @link http://www.2amigos.us/
- * @package doamigos\grid
  */
 class ToggleAction extends Action
 {
@@ -68,7 +63,7 @@ class ToggleAction extends Action
      * ['another_attribute'=>20]
      * or
      * function($model){
-     *     return ['smth_attr'=>$model->attr];
+     *     return ['attr'=>$model->attr];
      * }
      * where $model - is current toggled model object
      **/

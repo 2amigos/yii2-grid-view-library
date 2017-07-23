@@ -33,6 +33,10 @@ class LabelColumn extends DataColumn
      * @see http://getbootstrap.com/components/#labels
      */
     public $labels = [];
+    /**
+     * @var string forcely set the format to HTML.
+     */
+    public $format = 'html';
 
     /**
      * @inheritdoc
@@ -41,13 +45,14 @@ class LabelColumn extends DataColumn
     {
         $value = parent::getDataCellValue($model, $key, $index);
 
-        if (array_key_exists($value, $this->labels)) {
-            $value = ArrayHelper::getValue($this->labels, "$value.label", $value);
+        if (isset($this->labels[$value])) {
+
+            $text = ArrayHelper::getValue($this->labels, "$value.label", $value);
             $options = ArrayHelper::getValue($this->labels, "$value.options", ['class' => 'label-default']);
 
             Html::addCssClass($options, 'label');
 
-            return Html::tag('span', $value, $options);
+            return Html::tag('span', $text, $options);
         }
 
         return $value;

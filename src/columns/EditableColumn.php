@@ -136,7 +136,7 @@ class EditableColumn extends DataColumn
                 EditableSelect2Asset::register($view);
                 break;
             case 'wysihtml5':
-                $language = $language ? : 'en-US';
+                $language = $language ?: 'en-US';
                 EditableWysiHtml5Asset::register(
                     $view
                 )->js[] = 'vendor/locales/bootstrap-wysihtml5.' . $language . '.js';
@@ -149,8 +149,10 @@ class EditableColumn extends DataColumn
         $rel = $this->options['rel'];
         $selector = "a[rel=\"$rel\"]";
         $grid = "#{$this->grid->id}";
-        $js[] = ";jQuery('$selector').editable();";
-        $js[] = "dosamigos.editableColumn.registerHandler('$grid', '$selector');";
+        $script = ";jQuery('$selector').editable();";
+        $hash = hash('crc32', $script);
+        $js[] = $script;
+        $js[] = "dosamigos.editableColumn.registerHandler('$grid', '$selector', '$hash');";
         $view->registerJs(implode("\n", $js));
     }
 }

@@ -42,9 +42,13 @@ class ImageColumn extends DataColumn
             $this->format = 'html';
         }
 
-        $this->path = !empty($this->path) && mb_substr($this->path, -1) == '/'
-            ? ''
-            : '/';
+        if(!empty($this->path) )
+        {
+            $this->path = mb_substr($this->path, -1) == '/'
+                ? ''
+                : '/';
+        }
+        return $this->path;
     }
 
     /**

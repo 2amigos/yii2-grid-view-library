@@ -98,10 +98,6 @@ These columns can be used on any grid, you don't have to use them with our enhan
 - [LabelColumn](columns/label-column.md)
 - [ToggleColumn](columns/toggle-column.md)
 
-### Traits 
-
-- [ColumnTrait](columns/column-trait.md)
-
 Contributing
 ------------
 
