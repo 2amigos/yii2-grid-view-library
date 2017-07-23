@@ -60,14 +60,10 @@ class GridView extends \yii\grid\GridView
     {
         $method = 'render' . ucfirst(str_replace(['{', '}'], '', $name)); // methods are prefixed with 'render'!
 
-        if ($this->hasMethod($method)) {
-            return call_user_func([$this, $method]);
-        }
-
         foreach ($this->getBehaviors() as $behavior) {
             /** @var Object $behavior */
             if ($behavior->hasMethod($method)) {
-                return call_user_func($method, $behavior);
+                return call_user_func([$behavior, $method]);
             }
         }
 

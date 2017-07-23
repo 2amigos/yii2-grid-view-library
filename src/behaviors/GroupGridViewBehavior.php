@@ -29,7 +29,7 @@ class GroupGridViewBehavior extends Behavior
      * - [[GroupGridView::MERGE_NESTED]] Column values are merged if at least one value of nested columns changes
      *   (makes sense when several columns in $mergeColumns option)
      * - [[GroupGridView::MERGE_FIRST_ROW]] Column values are merged independently, but value is shown in first row of
-     * group and below cells just cleared (instead of `rowspan`)
+     *   group and below cells just cleared (instead of `rowspan`)
      *
      */
     public $type = self::MERGE_SIMPLE;
@@ -66,29 +66,17 @@ class GroupGridViewBehavior extends Behavior
      */
     public $extraRowClass = 'group-view-extra-row';
     /**
-     * @var GridView $grid pointer to the grid to wrap methods.
-     */
-    private $grid;
-    /**
      * @var array stores the groups
      */
     private $_groups = [];
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        $this->grid = $this->owner;
-        parent::init();
-    }
 
     /**
      * Renders the data models for the grid view.
      */
     public function renderItems()
     {
-        $grid = $this->grid;
+        /** @var GridView $grid */
+        $grid = $this->owner;
         $caption = $grid->renderCaption();
         $columnGroup = $grid->renderColumnGroup();
         $tableHeader = $grid->showHeader ? $grid->renderTableHeader() : false;
@@ -113,7 +101,11 @@ class GroupGridViewBehavior extends Behavior
      */
     public function renderTableBody()
     {
-        $grid = $this->grid;
+        if (!empty($this->mergeColumns) || !empty($this->extraRowColumns)) {
+            $this->groupColumns();
+        }
+        /** @var GridView $grid */
+        $grid = $this->owner;
         $models = array_values($grid->dataProvider->getModels());
         $keys = $grid->dataProvider->getKeys();
         $rows = [];
@@ -150,7 +142,9 @@ class GroupGridViewBehavior extends Behavior
      */
     public function groupColumns()
     {
-        $models = $this->grid->dataProvider->getModels();
+        /** @var GridView $grid */
+        $grid = $this->owner;
+        $models = $grid->dataProvider->getModels();
 
         if (count($models) == 0) {
             return;
@@ -162,7 +156,7 @@ class GroupGridViewBehavior extends Behavior
         // store columns for group.
         $columns = array_unique(ArrayHelper::merge($this->mergeColumns, $this->extraRowColumns));
         foreach ($columns as $key => $name) {
-            foreach ($this->grid->columns as $column) {
+            foreach ($grid->columns as $column) {
                 if (property_exists($column, 'attribute') && ArrayHelper::getValue($column, 'attribute') == $name) {
                     $columns[$key] = $column;
                 } elseif (in_array($name, $this->extraRowColumns)) {
@@ -253,7 +247,8 @@ class GroupGridViewBehavior extends Behavior
     public function renderTableRow($model, $key, $index)
     {
         $rows = [];
-        $grid = $this->grid;
+        /** @var GridView $grid */
+        $grid = $this->owner;
 
         if ($grid->rowOptions instanceof Closure) {
             $options = call_user_func($grid->rowOptions, $model, $key, $index, $this);
@@ -320,6 +315,9 @@ class GroupGridViewBehavior extends Behavior
      */
     protected function renderExtraRow($model, $key, $index, $totals)
     {
+        /** @var GridView $grid */
+        $grid = $this->owner;
+
         if ($this->extraRowValue instanceof Closure) {
             $content = call_user_func($this->extraRowValue, $model, $key, $index, $totals);
         } else {
@@ -331,7 +329,7 @@ class GroupGridViewBehavior extends Behavior
             $content = '<strong>' . implode(' :: ', $values) . '</strong>';
         }
 
-        $colspan = count($this->grid->columns);
+        $colspan = count($grid->columns);
 
         $cell = Html::tag('td', $content, ['class' => $this->extraRowClass, 'colspan' => $colspan]);
 
@@ -394,8 +392,10 @@ class GroupGridViewBehavior extends Behavior
      */
     protected function getRowValues($columns, $model, $index = 0)
     {
+        /** @var GridView $grid */
+        $grid = $this->owner;
         $values = [];
-        $keys = $this->grid->dataProvider->getKeys();
+        $keys = $grid->dataProvider->getKeys();
         foreach ($columns as $column) {
             /** @var \yii\grid\DataColumn $column */
             if ($column instanceof DataColumn) { // we only work with DataColumn types
@@ -418,7 +418,8 @@ class GroupGridViewBehavior extends Behavior
      */
     protected function getColumnDataCellContent($column, $model, $key, $index)
     {
-        $grid = $this->grid;
+        /** @var GridView $grid */
+        $grid = $this->owner;
         if ($column->content === null) {
             return $grid->formatter->format(
                 $this->getColumnDataCellValue($column, $model, $key, $index),
