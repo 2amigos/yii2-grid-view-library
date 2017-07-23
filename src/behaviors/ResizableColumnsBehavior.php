@@ -13,13 +13,39 @@ use dosamigos\grid\bundles\ResizableColumnsBundle;
 use dosamigos\grid\contracts\RegistersClientScriptInterface;
 use yii\base\Behavior;
 use yii\grid\GridView;
+use yii\helpers\Json;
 
 class ResizableColumnsBehavior extends Behavior implements RegistersClientScriptInterface
 {
     /**
-     * @var bool whether or not use a store. Defaults to true.
+     * @var array $clientOptions the options for the underlying resizable jquery plugin. Sets by default the store
+     * option. These are the options available and its defaults (translated from its js code):
+     *
+     * ```
+     * [
+     *  'selector' => new JsExpression('function selector($table) {... see js code ...}'),
+     *  'store' => new JsExpression('window.store'),
+     *  'syncHandlers' => true,
+     *  'resizeFromBody' => true,
+     *  'maxWidth' => new JsExpression('null'),
+     *  'minWidth' => 0.01
+     * ]
+     * ```
+     *
+     * It also has the options for you to configure the callback functions when triggering events. The events are:
+     *
+     * - start: When plugin starts resizing
+     * - resize: When plugin is resizing
+     * - stop: When plugin ends resizing
+     *
+     * To configure do:
+     *
+     * ```
+     * [
+     *  'start' => new JsExpression('function(){ console.log("resizing...");}')
+     * ]
      */
-    public $store = true;
+    public $clientOptions = [];
 
     /**
      * @inheritdoc
@@ -34,7 +60,9 @@ class ResizableColumnsBehavior extends Behavior implements RegistersClientScript
 
         ResizableColumnsBundle::register($view);
 
-        $options = $this->store === true ? '{store: window.store}' : '';
+        $options = !empty($this->clientOptions)
+            ? Json::encode($this->clientOptions)
+            : '';
 
         $view->registerJs(";jQuery('#$id > table.dosamigos-grid-view-table').resizableColumns($options);");
     }
