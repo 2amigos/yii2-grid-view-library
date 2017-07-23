@@ -30,6 +30,10 @@ wish to provide a colored visual feedback on the different states of a record.
 
 The above would display the status column like the following 
 
+The above would display
+
+![Basic Display](../images/label-column.png)
+
 
 
 © [2amigos](http://www.2amigos.us/) 2013-2017

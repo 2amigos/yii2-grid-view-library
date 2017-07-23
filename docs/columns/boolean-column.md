@@ -26,4 +26,9 @@ configurable content (i.e. icons or text labels).
     // ... other grid view configuration
 ```
 
+The above would display
+
+![Basic Display](../images/boolean-column.png)
+
+
 © [2amigos](http://www.2amigos.us/) 2013-2017
