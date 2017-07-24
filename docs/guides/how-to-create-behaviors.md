@@ -27,7 +27,7 @@ many issues:
 - It has huge amount of javascript files and dependencies that you cannot get rid of. It forces you to add them to your 
   project no matter what. 
 
-Those are the main ones but there are many more. Our approach solves those issues but some truly strong points:
+Those are the main ones but there are many more. Our approach solves those issues with:
 
 - Code enhancements are encapsulated within behaviors so the GridView widget stays very small (less than 100 lines).
 - If a developer wishes to add new enhancement, it can simply create a new behavior himself and use it immediately or 
