@@ -18,10 +18,8 @@ echo GridView::widget(
     [
         'behaviors' => [
             [
-                [
-                    'class' => '\dosamigos\grid\behaviors\LoadingBehavior',
-                    'type' => 'spinner'
-                ]
+                'class' => '\dosamigos\grid\behaviors\LoadingBehavior',
+                'type' => 'spinner'
             ]
         ],
         // ... other settings 

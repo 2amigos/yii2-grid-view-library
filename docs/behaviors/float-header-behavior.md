@@ -24,15 +24,13 @@ echo GridView::widget(
     [
         'behaviors' => [
             [
-                [
-                    'class' => '\dosamigos\grid\behaviors\FloatHeaderBehavior',
-                    'clientOptions' => [ // ... plugin options
-                        'floatContainerClass' => 'white',
-                        'top' => 50
-                    ],
-                    'clientEvents' => [
-                        'floatThead' => new JsExpression("function(e, isFloated, $container){ console.log('...'); }");
-                    ]
+                'class' => '\dosamigos\grid\behaviors\FloatHeaderBehavior',
+                'clientOptions' => [ // ... plugin options
+                    'floatContainerClass' => 'white',
+                    'top' => 50
+                ],
+                'clientEvents' => [
+                    'floatThead' => new JsExpression("function(e, isFloated, $container){ console.log('...'); }");
                 ]
             ]
         ],
