@@ -12,7 +12,7 @@ dosamigos.loadingGrid = (function ($) {
         handlers: [],
         registerHandler: function (grid, type, hash) {
             if ($.pjax) {
-                var $grid = $(grid), loadingClass = 'data-grid-loading-' + type;
+                var $grid = $(grid), loadingClass = 'da-grid-loading-' + type;
                 $grid
                     .parents('[data-pjax-container]')
                     .first()
