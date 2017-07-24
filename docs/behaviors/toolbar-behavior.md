@@ -121,4 +121,36 @@ added are:
 - `ReloadButton`: Reloads the grid. Automatically checks if pjax is being used on the grid and will ajax reload it.
 
 
+***Buttons Usage***
+
+```
+use yii\widgets\Pjax;
+use dosamigos\grid\GridView;
+use dosamigos\grid\behaviors\ResizableColumnsBehavior;
+use dosamigos\grid\behaviors\LoadingBehavior;
+use dosamigos\grid\behaviors\ToolbarBehavior;
+use dosamigos\grid\buttons\ReloadButton;
+
+
+Pjax::begin(['id' => 'test-pjax']);
+echo GridView::widget(
+    [
+        'behaviors' => [
+            'ResizableColumnsBehavior',
+            'LoadingBehavior',
+            [
+                'class' => 'ToolbarBehavior',
+                 // Able to display HTML on our buttons
+                'encodeLabels' => false,
+                'buttons' => [
+                    ReloadButton::widget(['options' => ['class' => 'btn-success']]),
+                ]
+            ]
+
+        ],
+        // ...
+    ]
+```
+
+
 © [2amigos](http://www.2amigos.us/) 2013-2017
