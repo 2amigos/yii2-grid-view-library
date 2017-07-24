@@ -20,9 +20,4 @@
 .da-grid-loading-spinner tr, .da-grid-loading-spinner td {
     background: transparent !important;
 }
-.da-grid-loading-bars tr, .da-grid-loading-bars td,
-.da-grid-loading-reload tr, .da-grid-loading-reload td,
-.da-grid-loading-spinner tr, .da-grid-loading-spinner td {
-    border-color: #efefef !important;
-}
 /** LoadingAsset Bundle **/
