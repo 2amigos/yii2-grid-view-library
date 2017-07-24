@@ -82,6 +82,7 @@ component. [Build your own!](guides/how-to-create-behaviors.md)
 
 - [FloatHeaderBehavior](behaviors/float-header-behavior.md)
 - [GroupColumnsBehavior](behaviors/group-columns-behavior.md)
+- [LoadingBehavior](behaviors/loading-behavior.md)
 - [ResizableColumnsBehavior](behaviors/resizable-columns-behavior.md)
 - [ToolbarBehavior](behaviors/toolbar-behavior.md)
 
