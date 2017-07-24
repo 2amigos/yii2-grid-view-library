@@ -88,10 +88,11 @@ class ToolbarBehavior extends Behavior
         }
         $toolbar = Html::tag('div', implode("\n", $content), $this->options);
 
-        if ($this->alignRight) {
-            $toolbar .= '<div class="clearfix"></div>';
-        }
         $container = Html::tag('div', $toolbar, $this->containerOptions);
+
+        if ($this->alignRight) {
+            $container .= '<div class="clearfix" style="margin-top:5px"></div>';
+        }
 
         return $container;
     }
