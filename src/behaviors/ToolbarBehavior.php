@@ -49,11 +49,13 @@ class ToolbarBehavior extends Behavior
      */
     public $options = [];
     /**
-     * @var array the options for the toolbar container. Defaults to right aligned.
+     * @var array the options for the toolbar container.
      */
-    public $containerOptions = [
-        'class' => 'pull-right'
-    ];
+    public $containerOptions = [];
+    /**
+     * @var string toolbar alignment, defaults to right alignment.
+     */
+    public $alignRight = true;
     /**
      * @var array contains the grouped buttons
      */
@@ -88,8 +90,8 @@ class ToolbarBehavior extends Behavior
 
         $container = Html::tag('div', $toolbar, $this->containerOptions);
 
-        if (mb_strpos(ArrayHelper::getValue($this->containerOptions, 'class', ''), 'pull-right') !== false) {
-            $container .= '<div class="clearfix"></div>';
+        if ($this->alignRight) {
+            $container .= '<div class="clearfix" style="margin-top:5px"></div>';
         }
 
         return $container;
@@ -101,6 +103,9 @@ class ToolbarBehavior extends Behavior
     protected function initOptions()
     {
         $this->options = ArrayHelper::merge($this->options, ['class' => 'btn-toolbar', 'role' => 'toolbar']);
+        if ($this->alignRight === true) {
+            Html::addCssClass($this->containerOptions, 'pull-right');
+        }
     }
 
     /**

@@ -113,5 +113,12 @@ echo GridView::widget(
 
 ```
 
+**Official buttons**
+
+We have created a set of official buttons so you can get a grasp on how to create buttons for this toolbar. The buttons 
+added are: 
+
+- `ReloadButton`: Reloads the grid. Automatically checks if pjax is being used on the grid and will ajax reload it.
+
 
 © [2amigos](http://www.2amigos.us/) 2013-2017
