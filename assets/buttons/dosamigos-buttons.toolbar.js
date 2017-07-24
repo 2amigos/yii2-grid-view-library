@@ -7,6 +7,7 @@ if (typeof dosamigos == "undefined" || !dosamigos) {
     var dosamigos = {};
 }
 dosamigos.toolbarButtons = (function ($) {
+    'use strict';
 
     return {
         reload: function (e) {

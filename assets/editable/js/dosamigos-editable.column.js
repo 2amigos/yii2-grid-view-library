@@ -7,7 +7,7 @@ if (typeof dosamigos == "undefined" || !dosamigos) {
     var dosamigos = {};
 }
 dosamigos.editableColumn = (function ($) {
-
+    'use strict';
     var pub = {
         handlers: [],
         registerHandler: function (grid, selector, hash) {
