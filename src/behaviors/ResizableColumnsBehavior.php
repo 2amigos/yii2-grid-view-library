@@ -64,6 +64,6 @@ class ResizableColumnsBehavior extends Behavior implements RegistersClientScript
             ? Json::encode($this->clientOptions)
             : '';
 
-        $view->registerJs(";jQuery('#$id > table.dosamigos-grid-view-table').resizableColumns($options);");
+        $view->registerJs(";jQuery('#$id > table.da-grid-view-table').resizableColumns($options);");
     }
 }

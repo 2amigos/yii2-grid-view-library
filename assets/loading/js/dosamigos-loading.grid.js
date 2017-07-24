@@ -9,21 +9,24 @@ if (typeof dosamigos == "undefined" || !dosamigos) {
 dosamigos.loadingGrid = (function ($) {
 
     return {
-        handlers: [],
         registerHandler: function (grid, type, hash) {
-            if ($.pjax) {
-                var $grid = $(grid), loadingClass = 'da-grid-loading-' + type;
-                $grid
-                    .parents('[data-pjax-container]')
-                    .first()
-                    .off('pjax:beforeSend.' + hash)
-                    .off('pjax:beforeReplace.' + hash)
-                    .on('pjax:beforeSend.' + hash, function () {
-                        $grid.addClass(loadingClass);
-                    })
-                    .on('pjax:beforeReplace.' + hash, function () {
-                        $grid.removeClass(loadingClass);
-                    });
+            if($.pjax)
+            {
+                var $grid = $(grid),
+                    loadingClass = 'da-grid-loading-' + type,
+                    $pjax = $grid.parents('[data-pjax-container]').first();
+
+                if ($pjax.length) {
+                    $pjax
+                        .off('pjax:beforeSend.' + hash)
+                        .off('pjax:beforeReplace.' + hash)
+                        .on('pjax:beforeSend.' + hash, function () {
+                            $grid.addClass(loadingClass);
+                        })
+                        .on('pjax:beforeReplace.' + hash, function () {
+                            $grid.removeClass(loadingClass);
+                        });
+                }
             }
         }
     };

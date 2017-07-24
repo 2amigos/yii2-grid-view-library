@@ -65,10 +65,10 @@ class FloatHeaderBehavior extends Behavior implements RegistersClientScriptInter
 
         $js = [];
         $id = $owner->getId();
-        $js[] = ";jQuery('#$id > table.dosamigos-grid-view-table').floatThead($options);";
+        $js[] = ";jQuery('#$id > table.da-grid-view-table').floatThead($options);";
         if (!empty($this->clientEvents)) {
             foreach ($this->clientEvents as $event => $handler) {
-                $js[] = "jQuery('#$id > table.dosamigos-grid-view-table').on('$event', $handler);";
+                $js[] = "jQuery('#$id > table.da-grid-view-table').on('$event', $handler);";
             }
         }
         $view->registerJs(implode("\n", $js));

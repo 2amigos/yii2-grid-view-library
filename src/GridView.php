@@ -26,7 +26,8 @@ class GridView extends \yii\grid\GridView
      */
     public function init()
     {
-        Html::addCssClass($this->tableOptions, 'dosamigos-grid-view-table');
+        Html::addCssClass($this->options, 'da-grid-view');
+        Html::addCssClass($this->tableOptions, 'da-grid-view-table');
         parent::init();
     }
 
