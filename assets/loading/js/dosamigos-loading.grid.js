@@ -16,12 +16,12 @@ dosamigos.loadingGrid = (function ($) {
                 $grid
                     .parents('[data-pjax-container]')
                     .first()
-                    .off('pjax:send.' + hash)
-                    .off('pjax:complete.' + hash)
-                    .on('pjax:send.' + hash, function () {
+                    .off('pjax:beforeSend.' + hash)
+                    .off('pjax:beforeReplace.' + hash)
+                    .on('pjax:beforeSend.' + hash, function () {
                         $grid.addClass(loadingClass);
                     })
-                    .on('pjax:complete.' + hash, function () {
+                    .on('pjax:beforeReplace.' + hash, function () {
                         $grid.removeClass(loadingClass);
                     });
             }
