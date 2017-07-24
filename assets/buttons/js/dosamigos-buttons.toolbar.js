@@ -20,7 +20,7 @@ dosamigos.toolbarButtons = (function ($) {
                     .attr('id');
 
                 if (pjaxId) {
-                    $.pjax.reload({container: pjaxId});
+                    $.pjax.reload({container: '#' + pjaxId});
                     return;
                 }
             }
