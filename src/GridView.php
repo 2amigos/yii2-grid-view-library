@@ -10,6 +10,7 @@
 namespace dosamigos\grid;
 
 use dosamigos\grid\contracts\RegistersClientScriptInterface;
+use dosamigos\grid\contracts\RunnableBehaviorInterface;
 use yii\base\Behavior;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -81,13 +82,13 @@ class GridView extends \yii\grid\GridView
     {
         parent::run();
 
-        $this->registerClientScript();
+        $this->runBehaviors();
     }
 
     /**
-     * Registers required client scripts of behaviors
+     * Runs behaviors, registering their scripts if necessary
      */
-    protected function registerClientScript()
+    protected function runBehaviors()
     {
         $behaviors = $this->getBehaviors();
 
@@ -95,6 +96,9 @@ class GridView extends \yii\grid\GridView
             foreach ($behaviors as $behavior) {
                 if ($behavior instanceof RegistersClientScriptInterface) {
                     $behavior->registerClientScript();
+                }
+                if($behavior instanceof RunnableBehaviorInterface) {
+                    $behavior->run();
                 }
             }
         }
