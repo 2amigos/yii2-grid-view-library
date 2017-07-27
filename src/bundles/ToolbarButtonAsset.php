@@ -18,4 +18,8 @@ class ToolbarButtonAsset extends AssetBundle
     public $js = [
         'js/dosamigos-buttons.toolbar.js'
     ];
+
+    public $depends = [
+        'yii\web\JqueryAsset',
+    ];
 }

@@ -26,7 +26,7 @@ class ToggleColumnAsset extends AssetBundle
     public $js = ['js/dosamigos-toggle.column.js'];
 
     public $depends = [
-        'yii\web\YiiAsset',
+        'yii\web\JqueryAsset',
         'dosamigos\assets\DosAmigosAsset',
     ];
 }
