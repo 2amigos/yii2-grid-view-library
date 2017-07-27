@@ -5,7 +5,7 @@
 [![Build Status](https://img.shields.io/travis/2amigos/yii2-grid-view-library/master.svg?style=flat-square)](https://travis-ci.org/2amigos/yii2-grid-view-library)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/2amigos/yii2-grid-view-library.svg?style=flat-square)](https://scrutinizer-ci.com/g/2amigos/yii2-grid-view-library/code-structure)
 [![Quality Score](https://img.shields.io/scrutinizer/g/2amigos/yii2-grid-view-library.svg?style=flat-square)](https://scrutinizer-ci.com/g/2amigos/yii2-grid-view-library)
-[![Total Downloads](https://img.shields.io/packagist/dt/2amigos/yii2-grid-view-library.svg?style=flat-square)](https://packagist.org/packages/2amigos/yii2-grid-view-library)
+[![Total Downloads](https://poser.pugx.org/2amigos/yii2-grid-view-library/downloads)](https://packagist.org/packages/2amigos/yii2-grid-view-library)
 
 This library enhances the official grid library for Yii2 providing developers with the required tools to develop and 
 display beautiful interfaces for their reports.
