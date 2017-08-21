@@ -277,7 +277,7 @@ class GroupColumnsBehavior extends Behavior
         $cells = [];
         /** @var \yii\grid\Column $column */
         foreach ($grid->columns as $column) {
-            $name = ArrayHelper::getValue($column, 'attribute');
+            $name = property_exists($column, 'attribute') ? ArrayHelper::getValue($column, 'attribute') : '' ;
 
             $isGroupColumn = in_array($name, $this->mergeColumns);
 
