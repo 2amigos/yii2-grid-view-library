@@ -9,7 +9,7 @@ The jquery plugin is the great [jQuery.floatThead](http://mkoryak.github.io/floa
 so to be able to work with GridView tables. Check the [plugin options](http://mkoryak.github.io/floatThead/#options) for 
 further information regarding the configuration options and events of the plugin.
 
-> **Note** This behavior cannot be used with used with [ResizableColumnsBehavior](resizable-columns-behavior.md) as it 
+> **Note** This behavior cannot be used with [ResizableColumnsBehavior](resizable-columns-behavior.md) as it 
 > requires the headers to be on fixed width. 
 
 ### Usage
